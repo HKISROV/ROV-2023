@@ -12,12 +12,12 @@ def key_press(key):
     else: 
         speed = 150
     for pin in pins:
-        wiringpi.pwmWrite(pin,180)
+        wiringpi.pwmWrite(pin,speed)
 
 wiringpi.wiringPiSetupGpio()
 
 for pin in pins:
-    wiringpi.pinMode(pin, wiringpi.GPIO_PWM_OUTPUT)
+    wiringpi.pinMode(pin, wiringpi.GPIO.PWM_OUTPUT)
     wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
 
 wiringpi.pwmSetClock(192)
