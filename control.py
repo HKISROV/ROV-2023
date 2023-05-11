@@ -46,10 +46,10 @@ def key_press(key): #See last line for fucntion call
 
     for pin in pins:
         if(pin % 2 == 0): #If the pin is even
-            wiringpi.pwnWrite(pin, speed[0]) #Writes the speed values for left motors
+            wiringpi.pwmWrite(pin, speed[0]) #Writes the speed values for left motors
 
         elif(pin % 2 == 1): #If the pin is odd
-            wiringpi.pwnWrite(pin, speed[1])  #Writes the speed values for right motors
+            wiringpi.pwmWrite(pin, speed[1])  #Writes the speed values for right motors
 
 
 
