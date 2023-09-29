@@ -1,32 +1,37 @@
 import time
 import wiringpi
 
+currentSpeed = 150
 pins = [18,12,13]
 
 def slowChange(start, end):
     if end > start:
-        for speed in range(start, end, 10):
+        for i in range(start, end+1, 10):
             for pin in pins:
-                wiringpi.pwnWrite(pin, speed)
+                wiringpi.pwmWrite(pin, i)
+                print(i)
+            time.sleep(0.2)
 
-    if start < end:
-        for speed in range (start, end, -10):
+    if end < start:
+        for i in range(start, end-1, -10):
             for pin in pins:
-                wiringpi.pwmWrite(pin, speed)
+                wiringpi.pwmWrite(pin, i)
+                print(i)
+            time.sleep(0.2)
 
-def keyPress(key):
+def keyPress(key, speed):
     if key[0] == "w":
         if(speed != 180):
             slowChange(speed, 180)
-        speed = 180
+        return 180
     elif key[0] == "s":
         if (speed != 110):
             slowChange(speed, 110)
-        speed = 110
+        return 110
     else: 
         if (speed != "150"):
             slowChange(speed, 150)
-        speed = 150
+        return 150
 
 
 wiringpi.wiringPiSetupGpio()
@@ -46,4 +51,4 @@ for pin in pins:
 
 while True:  #Running code
     key = input("enter: ")
-    keyPress(key) #Calls function key_press above with value inputed.
+    currentSpeed = keyPress(key, currentSpeed) #Calls function key_press above with value inputed.
